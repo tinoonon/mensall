@@ -1,0 +1,924 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Privacy - Eduarda</title>
+    <link rel="apple-touch-icon" sizes="76x76" href="images/MainIcon.svg">
+    <link rel="icon" type="image/png" href="images/MainIcon.svg">
+
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Privacy - Eduarda">
+    <meta property="og:description" content="Conteúdo Exclusivo">
+    <meta property="og:url" content="https://pay.risepay.com.br/Pay/5ed4ccc92a1f4e8e9aecab93cb07685d">
+    <meta property="og:site_name" content="RisePay">
+
+        <meta property="og:image" content="images/ProductImage_3.png">
+        <meta property="og:image:width" content="1200">
+        <meta property="og:image:height" content="630">
+
+    <link rel="icon" type="image/png" href="images/MainIcon.svg">
+
+    <!--     Fonts and icons     -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Nucleo Icons -->
+    <link href="css/nucleo-icons.css" rel="stylesheet">
+    <link href="css/nucleo-svg.css" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <script src="js/42d5adcbca.js" crossorigin="anonymous"></script>
+    <link href="css/nucleo-svg.css" rel="stylesheet">
+    <!-- CSS Files -->
+    <link id="pagestyle" href="css/argon-dashboard.css" rel="stylesheet">
+</head>
+
+<body>
+
+
+    
+    <link href="css/personalizavel.min.css" rel="stylesheet">
+    <link href="css/personalizavel.css" rel="stylesheet">
+
+<script>
+    function formatarTelefone() {
+        let input = document.getElementById('TelefoneComprador2');
+        let numeroLimpo = input.value.replace(/\D/g, '');
+
+        if (numeroLimpo.length > 11) {
+            numeroLimpo = numeroLimpo.substring(0, 11);
+        }
+
+        let telefoneFormatado = '';
+
+        if (numeroLimpo.length > 0) {
+            telefoneFormatado += '(' + numeroLimpo.substring(0, 2);
+        }
+        if (numeroLimpo.length > 2) {
+            telefoneFormatado += ') ' + numeroLimpo.substring(2, 3);
+        }
+        if (numeroLimpo.length > 3) {
+            telefoneFormatado += numeroLimpo.substring(3, 7);
+        }
+        if (numeroLimpo.length > 7) {
+            telefoneFormatado += '-' + numeroLimpo.substring(7, 11);
+        }
+
+        if (numeroLimpo.length >= 3) {
+            let ddd = numeroLimpo.substring(0, 2);
+            let segundoDigitoDDD = numeroLimpo.substring(2, 3);
+            let dddsValidos = [
+                '61', '62', '64', '65', '66', '67', '82', '71', '73', '74', '75', '77',
+                '85', '88', '98', '99', '83', '81', '87', '86', '89', '84', '79',
+                '68', '96', '92', '97', '91', '93', '94', '69', '95', '63',
+                '27', '28', '31', '32', '33', '34', '35', '37', '38', '21', '22', '24',
+                '11', '12', '13', '14', '15', '16', '17', '18', '19', '41', '42', '43',
+                '44', '45', '46', '49', '51', '53', '54', '55', '47', '48'
+            ];
+
+            if (!dddsValidos.includes(ddd)) {
+                alert('DDD inválido: ' + ddd);
+                telefoneFormatado = telefoneFormatado.substring(0, 4);
+            }
+
+            if (segundoDigitoDDD !== '9') {
+                alert('O número de telefone deve começar com 9 após o código de área.');
+                telefoneFormatado = telefoneFormatado.substring(0, 4); 
+            }
+        }
+
+        input.value = telefoneFormatado;
+    }
+
+</script>
+<style>
+        #loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+        background: #1e40af;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .spinner-modal {
+            background: white;
+            border-radius: 16px;
+            padding: 40px 32px;
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.3);
+            border: 2px solid #3b82f6;
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            animation: modalSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        /* Spinner Principal */
+        .spinner-container {
+            position: relative;
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+        }
+
+        .spinner-outer {
+            position: absolute;
+            inset: 0;
+            border: 4px solid #dbeafe;
+            border-radius: 50%;
+        }
+
+        .spinner-inner {
+            position: absolute;
+            inset: 0;
+            border: 4px solid transparent;
+            border-top: 4px solid #3b82f6;
+            border-right: 4px solid #1d4ed8;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .spinner-icon {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .qr-icon {
+            width: 32px;
+            height: 32px;
+            fill: #1e40af;
+        }
+
+        /* Textos */
+        .spinner-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1e40af;
+            margin-bottom: 8px;
+        }
+
+        .spinner-subtitle {
+            color: #6b7280;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        /* Barra de Progresso */
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #dbeafe;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 24px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            border-radius: 3px;
+            animation: progressPulse 2s ease-in-out infinite;
+        }
+
+        /* Ícones Decorativos */
+        .decorative-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            color: #9ca3af;
+        }
+
+        .decorative-icon {
+            width: 20px;
+            height: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .decorative-icon:nth-child(1) { animation-delay: 0ms; }
+        .decorative-icon:nth-child(2) { animation-delay: 200ms; }
+        .decorative-icon:nth-child(3) { animation-delay: 400ms; }
+        .decorative-icon:nth-child(4) { animation-delay: 600ms; }
+        .decorative-icon:nth-child(5) { animation-delay: 800ms; }
+
+        .ping-dot {
+            width: 8px;
+            height: 8px;
+            background: #3b82f6;
+            border-radius: 50%;
+            animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @keyframes progressPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+                animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+            }
+            50% {
+                transform: translateY(-4px);
+                animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+            }
+        }
+
+        @keyframes ping {
+            75%, 100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        /* Responsividade */
+        @media (max-width: 480px) {
+            .spinner-modal {
+                padding: 32px 24px;
+                margin: 16px;
+            }
+            
+            .spinner-container {
+                width: 64px;
+                height: 64px;
+            }
+            
+            .qr-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+
+
+<div id="loading-overlay">
+    <div class="spinner-modal">
+        <!-- Spinner Principal -->
+        <div class="spinner-container">
+            <div class="spinner-outer"></div>
+            <div class="spinner-inner"></div>
+            <div class="spinner-icon">
+                <svg class="qr-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <rect x="7" y="7" width="3" height="3"></rect>
+                    <rect x="14" y="7" width="3" height="3"></rect>
+                    <rect x="7" y="14" width="3" height="3"></rect>
+                    <rect x="14" y="14" width="3" height="3"></rect>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Textos -->
+        <h3 class="spinner-title">Gerando QR Code PIX</h3>
+        <p class="spinner-subtitle">
+            Aguarde enquanto processamos sua solicitação...
+        </p>
+
+        <!-- Barra de Progresso -->
+        <div class="progress-bar">
+            <div class="progress-fill"></div>
+        </div>
+
+        <!-- Ícones Decorativos -->
+        <div class="decorative-icons">
+            <svg class="decorative-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+            <div class="ping-dot"></div>
+            <svg class="decorative-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                <rect x="7" y="7" width="3" height="3"></rect>
+                <rect x="14" y="7" width="3" height="3"></rect>
+                <rect x="7" y="14" width="3" height="3"></rect>
+                <rect x="14" y="14" width="3" height="3"></rect>
+            </svg>
+            <div class="ping-dot"></div>
+            <svg class="decorative-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+            </svg>
+        </div>
+    </div>
+</div>
+
+
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="robots" content="noindex">
+    <script type="text/javascript" src="js/checkout.min.js"></script>
+    <!-- <script src="https://www.google.com/recaptcha/api.js?render=6LeZ7E0sAAAAANsyRll6fARuv3MhPFY3dw6mWGyV"></script> -->
+    <script src="js/jquery-3.6.0.min.js"></script>
+    <script src="js/checkoutShipping.js"></script>
+    <script src="js/FacebookConversionAPI.js"></script>
+    <script src="js/Checkout1.js"></script>
+    <script src="js/sigilopay.js"></script>
+        <script src="js/PodPay.js"></script>
+
+
+
+<div id="countdown-data" data-countdown="5"></div>
+<div id="sitekey-data" data-sitekey="6LeZ7E0sAAAAANsyRll6fARuv3MhPFY3dw6mWGyV"></div>
+<div id="shippingInfo" data-shipping-required="false"></div>
+<div id="redirect-data" data-use-back-redirect="True" data-back-redirect-url="https://pay.risepay.com.br/Pay/a100d1d9f0ba43ffa528533468e7057c">
+</div>
+<div id="facebookPixelsData" data-facebook-pixels="[{" pixelid":"4072017393020887","pixelapitoken":"eaac19pofzcl0bqhm82wjki3mqq5azcj1jobum5zaglvulc5berqe8tucxgsvxjo2t51cw1zcfzatbqzya75x4hzpbyxh7rneoomfm8jpeypfhslwm03yskokdg8vasbzbmie19nb8fyp1yy5hbqztfqqgfsx6fhzbak9pjvzcqboaahpov6g0xz4qmtvfoepj1qowgzdzd"},{"pixelid":"717015278062957","pixelapitoken":"eaasbxefrwqubq89x5guovhiv0bxjwzb7cbqgov3i0xt3ayk4wuanizazax0xoitlirzc5lvm6il18dffignxnb4xiglzqkq4apr13xeqbommfqjs5fdb5zcd7m7em941rucbnvboybq6fq0dwcwr7gicil9p0cprluhu3qiwp2xf8bqszab9xi7hxdzc1qwbazfazdzd"}]"=""></div>
+<div id="tiktokPixelsData" data-tiktok-pixels="[{" pixelid":"d685tpbc77u1gpvv37sg"}]"=""></div>
+<div id="kwaiPixelsData" data-kwai-pixels="[]"></div>
+<div id="googleData" data-google-pixels="[]" data-google-analytics-id="">
+</div>
+<div id="dataContainer" data-price="9.90" data-taxa-juros="3.90" data-product-price="9.90">
+</div>
+<div id="couponData" data-existing-coupons="False" data-offer-id="51678" data-api-url="https://api.risepay.com.br/api/Coupon/validate">
+</div>
+<div id="redirectData" data-use-thanks-page="True" data-thanks-page-url="https://dudaconteudos.shop/duda/UP01chamada">
+</div>
+<div id="apiKey" data-token="35aeeb81c7a64c8b8b0f5325534b2169"></div>
+
+
+                        
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+
+<link rel="stylesheet" href="css/intlTelInput.css">
+<script src="js/intlTelInput.js"></script>
+
+
+<input id="ModelPay" name="ModelPay" type="hidden" value="2">
+<div id="dynamicErrors" class="alert alert-danger" style="display: none;">
+    <!-- Mensagens de erro serão inseridas aqui pelo JavaScript -->
+</div>
+<link href="css/checkout.css" rel="stylesheet">
+<link href="css/checkoutVegDigital.css" rel="stylesheet">
+
+<style>
+    html {
+    background: #ff6600;
+    }
+
+    .selected {
+    border: 2px solid #4246FF;
+    }
+
+    .selected .shipping-background {
+    background-color: #4246FF;
+    }
+
+    .iti__country-container {
+    display: none !important;
+    }
+</style>
+
+<main>
+
+                    <form id="customerForm" style="background-color: #ff6600;">
+
+                            <div class="logo">
+                                <figure style="align-content: center;">
+                                        <img src="images/header1_1772224631722.webp" alt="Logo" style="aspect-ratio: auto">
+                                </figure>
+                                <figure style="align-content: center;">
+                                        <img src="images/safe-payment.svg" alt="Ícone de escudo" style="aspect-ratio: auto">
+                                </figure>
+                            </div>
+                            <div id="bannerContainer" class="bannerContainer" style="padding-top: 20px !important;">
+                                <figure class="main-image">
+                                    <img class="bannerImage" src="images/loto%20topo%20ck.jpg" id="bannerImage">
+                                </figure>
+                            </div>
+                        <section class="main-container" style="margin-bottom: 0; padding-bottom: 20px;">
+                            <section class="client-payment">
+                                <div class="card card-container info">
+                                    <input name="__RequestVerificationToken" type="hidden" value="CfDJ8KVt6Ma4O21GjGk-ATNjhbAb_suSRbY3Wr0xWibIYTPVRc2INhkggwuOmpwXJ5P94xJEWgW7gYJAvjQalH71ZmEhZr_k9YclqM9YwnDKTC8JndpuqrKN68TCM-Gn9OwSLEJLmU_860i_QOha7fAy0ww">
+                                    <span class="title"><bolder>Identificação </bolder></span>
+                                    <div class="form-group">
+                                        <label>  Email </label>
+                                        <div class="col-12">
+                                            <input type="email" class="form-control" id="EmailComprador" name="buyer-email" placeholder="exemplo@email.com" onchange="validateEmail()">
+                                            <span id="buyer-email-error" class="error-message-required"></span>
+                                            <span id="buyer-email-invalid" class="error-message-email">Email inválido</span>
+                                        </div>
+                                    </div>
+                                        <input type="hidden" id="TelefoneComprador2" name="TelefoneComprador2" value="(11) 98765-4321">
+                                        <input type="hidden" id="TelefoneComprador2CountryCode" name="TelefoneComprador2CountryCode" value="+55">
+                                   
+                                    <div class="form-group">
+                                        <input type="hidden" name="curUrl" value="5ed4ccc92a1f4e8e9aecab93cb07685d">
+                                        <input type="hidden" id="maxInstallments" value="4">
+
+                                        <label> Nome Completo </label>
+
+                                        <input type="text" id="NomeComprador2" class="form-control" name="buyer-name" placeholder="Nome e Sobrenome">
+                                        <span id="buyer-name-error" class="error-message-required"></span>
+                                    </div>
+
+                                </div>
+
+                                <div class="card card-container paymentinfo">
+                                    <section>
+                                        
+
+                                        <span class="title">Pagamento</span>
+
+                                        <div class="pagamento-diplay-flex">
+                                                <label class="botao pix col">
+                                                        <input type="radio" name="paymentType" class="radio" value="Pix" onchange="changePaymentType(this)" checked="">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="19px" height="20px" viewBox="0 0 30 30">
+                                                        <path d="M 15 1.0996094 C 13.975 1.0996094 12.949922 1.4895313 12.169922 2.2695312 L 7.1894531 7.25 L 7.3398438 7.25 C 8.6098437 7.25 9.7992188 7.740625 10.699219 8.640625 L 14.189453 12.130859 C 14.639453 12.570859 15.360547 12.570859 15.810547 12.130859 L 19.300781 8.640625 C 20.200781 7.740625 21.390156 7.25 22.660156 7.25 L 22.810547 7.25 L 17.830078 2.2695312 C 17.050078 1.4895313 16.025 1.0996094 15 1.0996094 z M 5.6894531 8.75 L 2.2695312 12.169922 C 0.70953125 13.729922 0.70953125 16.270078 2.2695312 17.830078 L 5.6894531 21.25 L 7.3398438 21.25 C 8.2098438 21.25 9.030625 20.910781 9.640625 20.300781 L 13.130859 16.810547 C 14.160859 15.780547 15.839141 15.780547 16.869141 16.810547 L 20.359375 20.300781 C 20.969375 20.910781 21.790156 21.25 22.660156 21.25 L 24.310547 21.25 L 27.730469 17.830078 C 29.290469 16.270078 29.290469 13.729922 27.730469 12.169922 L 24.310547 8.75 L 22.660156 8.75 C 21.790156 8.75 20.969375 9.0892188 20.359375 9.6992188 L 16.869141 13.189453 C 16.359141 13.699453 15.68 13.960938 15 13.960938 C 14.32 13.960938 13.640859 13.699453 13.130859 13.189453 L 9.640625 9.6992188 C 9.030625 9.0892187 8.2098437 8.75 7.3398438 8.75 L 5.6894531 8.75 z M 15 17.539062 C 14.7075 17.539062 14.414453 17.649141 14.189453 17.869141 L 10.699219 21.359375 C 9.7992188 22.259375 8.6098437 22.75 7.3398438 22.75 L 7.1894531 22.75 L 12.169922 27.730469 C 13.729922 29.290469 16.270078 29.290469 17.830078 27.730469 L 22.810547 22.75 L 22.660156 22.75 C 21.390156 22.75 20.200781 22.259375 19.300781 21.359375 L 15.810547 17.869141 C 15.585547 17.649141 15.2925 17.539062 15 17.539062 z"></path>
+                                                    </svg>
+                                                    <b>Pix</b>
+                                                </label>
+                                        </div>
+                                         
+                                        <div id="pixDetails" style="display:none; padding-top: 0px !important; padding-bottom: 10px !important;">
+                                            <div class="row">
+                                                        <input type="hidden" id="CPFCompradorPix" name="customerPixDocument" value="535.796.370-37">
+                                                
+                                            </div>
+                                        </div>
+
+                                        <div id="bankSlipDetails" style="display:none; padding-top: 0px !important; padding-bottom: 10px !important;">
+                                                <input type="hidden" id="CPFCompradorBankSlip" name="customerPixDocument" value="535.796.370-37">
+                                            
+                                        </div>
+                                        <input type="hidden" id="cardHash" name="cardHash">
+                                        <div id="creditCardDetails" style="display:none; padding-top: 0 !important; padding-bottom: 10px !important;">
+                                            <div class="card-container creditCard">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label>Número do cartão</label>
+                                                        <div class="form-group">
+                                                            <input type="text" id="CartaoComprador" maxlength="19" class="form-control" name="cardNumber" placeholder="1234 5678 9101 1121">
+                                                            <span id="cardNumber-error" class="error-message-required"></span>
+                                                            <span id="errorSpanCartao" class="error-message" style="display: none;">Número do Cartão Inválido</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label>Nome do portador</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" name="cardHolderName" placeholder="Nome como está no cartão">
+                                                            <span id="cardHolderName-error" class="error-message-required"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-data">
+                                                    <div class="validity">
+                                                        <label>Validade</label>
+                                                        <div class="custom-select">
+                                                            <div class="month">
+                                                                <i class="arrow">
+                                                                    <img src="images/validity.svg" alt="arrow">
+                                                                </i>
+                                                                <select name="mes" id="mes" onchange="ChangeCardMonthFromDropbox()">
+                                                                    <option value="" disabled="" selected="">Mês</option>
+                                                                    <option value="01">01</option>
+                                                                    <option value="02">02</option>
+                                                                    <option value="03">03</option>
+                                                                    <option value="04">04</option>
+                                                                    <option value="05">05</option>
+                                                                    <option value="06">06</option>
+                                                                    <option value="07">07</option>
+                                                                    <option value="08">08</option>
+                                                                    <option value="09">09</option>
+                                                                    <option value="10">10</option>
+                                                                    <option value="11">11</option>
+                                                                    <option value="12">12</option>
+                                                                </select>
+                                                                <input hidden="" type="text" class="form-control" id="MesCompradorCartao" name="cardMonth" min="1" max="12" maxlength="2" placeholder="mm">
+                                                                <span id="cardMonth-error" class="error-message-required"></span>
+                                                                <span id="errorSpanMes" class="error-message-required" style="display: none;">Número do Mês Inválido</span>
+                                                            </div>
+                                                            <div class="year">
+                                                                <i class="arrow">
+                                                                    <img src="images/validity.svg" alt="arrow">
+                                                                </i>
+                                                                <select name="ano" id="ano" onchange="ChangeCardYearFromDropbox()">
+                                                                    <option value="" disabled="" selected="">Ano</option>
+                                                                </select>
+                                                                <input hidden="" type="text" class="form-control" id="AnoCompradorCartao" maxlength="2" name="cardYear" placeholder="aa">
+                                                                <span id="cardYear-error" class="error-message-required"></span>
+                                                                <span id="errorSpanAno" class="error-message-required" style="display: none;">Ano Inválido</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="security">
+                                                        <label>CÓD. DE SEGURANÇA</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" id="CVVCompradorCartao" maxlength="3" name="cardCVV" placeholder="123">
+                                                            <span id="cardCVV-error" class="error-message-required"></span>
+                                                            <span id="errorSpanCVV" class="error-message-required" style="display: none;">Número do CVV Inválido</span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label>CPF/CNPJ</label>
+                                                        <div class="form-group">
+                                                            <input type="text" class="form-control" max="14" name="customerCardDocument" id="CPFCompradorCartao" placeholder="123.456.789-12">
+                                                            <span id="customerCardDocument-error" class="error-message-required"></span>
+                                                            <span id="errorSpanCPFCartao" class="error-message-required" style="display: none;">CPF/CNPJ Inválido</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <label>Parcelas</label>
+                                                        <div class="form-group">
+                                                            <select class="form-control" id="installmentsSelect">
+                                                                <!-- As opções serão adicionadas aqui por JavaScript -->
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <div>
+                                                    <div id="pedidos" class="pedidos-diplay-flex pedidos-border" style="border-color: #f88737;
+                                                        width: 100%;
+                                                        border-radius: 0px">
+                                                        <div class="col-12 pedidos-cor-header" style="background: #f88737">
+
+
+                                                                <span style="color: #ffffff;"> Privacy - Juliana Bonde </span>
+                                                        </div>
+                                                        <div class="detalhes-produto-container" style=" background: #ffffff; padding-top: 10px;">
+                                                            <div class="detalhes-produto-order-bumps">
+                                                                <div>
+                                                                        <div class="image-container">
+                                                                            <img src="images/ProductImage_1.png">
+                                                                        </div>
+                                                                </div>
+
+                                                                <div class="produtos-margin-left">
+                                                                            <span style="color: #000000"> Privacy - Juliana Bonde: Sim, eu quero! </span>
+                                                                    <div>
+                                                                        <span>
+                                                                            <strong style="color: #000000;">R$ 6.90 </strong>  
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pedidos-produto">
+                                                                <div class="form-check">
+
+                                                                    <input id="selectedProducts" type="checkbox" class="form-check-input" name="selectedProducts" data-name="Privacy - Juliana Bonde" value="51682" data-price="6.90">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="pedidos" class="pedidos-diplay-flex pedidos-border" style="border-color: #f88737;
+                                                        width: 100%;
+                                                        border-radius: 0px">
+                                                        <div class="col-12 pedidos-cor-header" style="background: #f88737">
+
+
+                                                                <span style="color: #ffffff;"> Privacy - Mel Maia </span>
+                                                        </div>
+                                                        <div class="detalhes-produto-container" style=" background: #ffffff; padding-top: 10px;">
+                                                            <div class="detalhes-produto-order-bumps">
+                                                                <div>
+                                                                        <div class="image-container">
+                                                                            <img src="images/ProductImage_4.png">
+                                                                        </div>
+                                                                </div>
+
+                                                                <div class="produtos-margin-left">
+                                                                            <span style="color: #000000"> Privacy - Mel Maia: Sim, eu quero! </span>
+                                                                    <div>
+                                                                        <span>
+                                                                            <strong style="color: #000000;">R$ 6.90 </strong>  
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pedidos-produto">
+                                                                <div class="form-check">
+
+                                                                    <input id="selectedProducts" type="checkbox" class="form-check-input" name="selectedProducts" data-name="Privacy - Mel Maia" value="51683" data-price="6.90">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="pedidos" class="pedidos-diplay-flex pedidos-border" style="border-color: #f88737;
+                                                        width: 100%;
+                                                        border-radius: 0px">
+                                                        <div class="col-12 pedidos-cor-header" style="background: #f88737">
+
+
+                                                                <span style="color: #ffffff;"> Privacy - MC Mirella </span>
+                                                        </div>
+                                                        <div class="detalhes-produto-container" style=" background: #ffffff; padding-top: 10px;">
+                                                            <div class="detalhes-produto-order-bumps">
+                                                                <div>
+                                                                        <div class="image-container">
+                                                                            <img src="images/ProductImage_2.png">
+                                                                        </div>
+                                                                </div>
+
+                                                                <div class="produtos-margin-left">
+                                                                            <span style="color: #000000"> Privacy - MC Mirella</span>
+                                                                    <div>
+                                                                        <span>
+                                                                            <strong style="color: #000000;">R$ 6.90 </strong>  
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pedidos-produto">
+                                                                <div class="form-check">
+
+                                                                    <input id="selectedProducts" type="checkbox" class="form-check-input" name="selectedProducts" data-name="Privacy - MC Mirella" value="51684" data-price="6.90">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div id="pedidos" class="pedidos-diplay-flex pedidos-border" style="border-color: #f88737;
+                                                        width: 100%;
+                                                        border-radius: 0px">
+                                                        <div class="col-12 pedidos-cor-header" style="background: #f88737">
+
+
+                                                                <span style="color: #ffffff;"> Whatsapp Pessoal </span>
+                                                        </div>
+                                                        <div class="detalhes-produto-container" style=" background: #ffffff; padding-top: 10px;">
+                                                            <div class="detalhes-produto-order-bumps">
+                                                                <div>
+                                                                        <div class="image-container">
+                                                                            <img src="images/ProductImage.png">
+                                                                        </div>
+                                                                </div>
+
+                                                                <div class="produtos-margin-left">
+                                                                            <span style="color: #000000"> Whatsapp Pessoal: Sim, eu quero! </span>
+                                                                    <div>
+                                                                        <span>
+                                                                            <strong style="color: #000000;">R$ 29.90 </strong>  
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="pedidos-produto">
+                                                                <div class="form-check">
+
+                                                                    <input id="selectedProducts" type="checkbox" class="form-check-input" name="selectedProducts" data-name="Whatsapp Pessoal" value="51685" data-price="29.90">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                        </div>
+
+                                        <input type="hidden" id="recaptchaToken" name="recaptchaToken">
+                                            <div style="width: 100%; height: 100%; flex-direction: column; justify-content: center; align-items: flex-start; gap: 24px; display: inline-flex">
+                                                <div style="align-self: stretch; justify-content: flex-start; align-items: center; gap: 4px; display: inline-flex">
+                                                    <div style="flex: 1 1 0; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 4px; display: inline-flex">
+                                                        <div style="color: #64748B; font-size: 16px; font-family: Manrope; font-weight: 700; word-wrap: break-word">Detalhes de compra</div>
+                                                        <div style="align-self: stretch; height: 1px; border-top: 1px #E7E7EB solid"></div>
+                                                    </div>
+                                                </div>
+                                                <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                                    <div style="align-self: stretch; flex-direction: column; justify-content: flex-start; align-items: flex-start; gap: 16px; display: flex">
+                                                        <div style="align-self: stretch; height: 20px; justify-content: space-between; align-items: center; display: inline-flex">
+                                                            <div style="color: #64748B; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 19.60px; word-wrap: break-word">Privacy - Eduarda (x1)</div>
+                                                            <div style="text-align: right; color: #64748B; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 19.60px; word-wrap: break-word">R$ 9.90</div>
+                                                        </div>
+                                                        <div id="couponSection" style="align-self: stretch; height: 19.60px; justify-content: space-between; align-items: center; display: inline-flex;  display: none;">
+                                                            <div style="color: #64748B; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 19.60px; word-wrap: break-word">Desconto do cupom</div>
+                                                            <div id="couponValue" style="text-align: right; color: #64748B; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 19.60px; word-wrap: break-word"></div>
+                                                        </div>
+                                                        <div id="shippingSection" style="align-self: stretch; height: 19.60px; justify-content: space-between; align-items: center; display: inline-flex; display: none;">
+                                                            <div style="color: #64748B; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 19.60px; word-wrap: break-word">Frete</div>
+                                                            <div id="shippingValue" style="text-align: right; color: #64748B; font-size: 14px; font-family: Manrope; font-weight: 400; line-height: 19.60px; word-wrap: break-word">Valor do frete aqui</div>
+                                                        </div>
+                                                        <div id="orderBumpsSection" style="align-self: stretch; justify-content: space-between; align-items: center; display: flex; flex-direction: column; gap: 8px; display: none;">
+                                                            <!-- Detalhes do OrderBump vão aparecer aqui -->
+                                                        </div>
+
+
+                                                        <div style="align-self: stretch; height: 1px; border-top: 1px #E7E7EB solid"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div id="totalValue" style="font-size: 16px; color: #32c770; font-weight: bolder; margin-top: 20px;">
+                                                Valor total: R$ 9.90
+                                            </div>
+                                            <div id="btn-purchase-submit">
+                                                <button id="submitButton" type="button" class="btn col-12 botao-finalizar-compras" style="background-color: #ff6600!important;
+                                                        color: #f3f3f3!important" onclick="submitForm()" title="Faça a verificação para finalizar a compra">
+                                                    <span id="purchaseSpan" style="color: inherit;">
+                                                        VEM BRINCAR COMIGO AMOR
+                                                    </span>
+                                                    <span id="processingSpan" style="display: none;">Processando...</span>
+                                                    <span id="spinnerSpan" class="spinner-border spinner-border-sm" role="status" aria-hidden="true" style="display: none;"></span>
+                                                </button>
+                                            </div>
+                                        <div class="form-check">
+                                            <div class="save-info">
+                                            </div>
+                                        </div>
+
+                                        <div class="security-environment">
+                                            <span class="aviso_ambiemte_seguro">Ambiente criptografado e 100% seguro.</span>
+                                        </div>
+                                    </section>
+                                </div>
+
+                                <input hidden="" id="orderUpsellGUID">
+
+                    
+
+    </section>
+
+    <section class="product-client">
+        <div class="card card-container product-info-card">
+            <input name="__RequestVerificationToken" type="hidden" value="CfDJ8KVt6Ma4O21GjGk-ATNjhbAb_suSRbY3Wr0xWibIYTPVRc2INhkggwuOmpwXJ5P94xJEWgW7gYJAvjQalH71ZmEhZr_k9YclqM9YwnDKTC8JndpuqrKN68TCM-Gn9OwSLEJLmU_860i_QOha7fAy0ww">
+            <div class="produto-compra">
+                <span class="description-text"> Adquirindo <img src="images/downArrow.svg"></span>
+                <div class="prod-info">
+                    <figure>
+                                <img src="images/ProductImage_3.png" alt="Produto">
+                        <span> Privacy - Eduarda </span>
+                    </figure>
+                        <div class="product-price">
+                            <span>
+                                Por  <strong id="valorDoProdutoComprado"> </strong>
+                            </span>
+                        </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    </section></form>
+</main>
+<footer>
+    <span>Formas de pagamento</span>
+    <div class="paymentsCards">
+        <input type="hidden" id="acquirer" data-val="true" data-val-required="The acquirer field is required." name="acquirer" value="9">
+        <input type="hidden" id="apiUrl" data-val="true" data-val-required="The ApiRisePay field is required." name="ApiRisePay" value="https://api.risepay.com.br/api">
+        <img src="images/card-pix.svg" alt="Pix">
+        <img src="images/boleto.svg" alt="Boleto">
+    </div>
+    <p>Pagamento processado por © 2025 Risepay</p>
+    <p class="safeEnvironment"><img src="images/safe.svg" alt="Ambiente seguro"> Ambiente seguro</p>
+</footer>
+
+<div id="PixModal" class="modal" style="display:none; background-color: #ff6600; color: black;">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Pagamento via Pix</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" onclick="closeModal()">
+                    <span aria-hidden="true">X×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-pix">
+                    <div><strong>Pedido:</strong> <span id="numero-pedido">Numero do pedido</span></div>
+                    <div>
+                        <strong>valor:</strong>
+                        <span id="TotalPricePixModal">R$ 9.90</span>
+                        <img class="px-1" src="images/pix-banner.png">
+                    </div>
+
+                </div>
+                <div>
+                    <strong class="h6">PIX Copia e Cola</strong>
+                    <div id="PixCopyPasteDiv">
+                        <div id="PixCopyPasteData"></div>
+                    </div>
+                    <div class="botao-copia-cola">
+                        <button class="btn btn-success" onclick="copiarTexto()" id="copyButton">
+                            <svg width="17" height="16" viewBox="0 0 17 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_2291_6011)">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M3.12221 0.0507813C2.44022 0.0507813 1.78617 0.321699 1.30394 0.803935C0.821699 1.28617 0.550781 1.94022 0.550781 2.62221L0.550781 11.1936C0.550781 11.421 0.641087 11.639 0.801833 11.7997C0.962578 11.9605 1.1806 12.0508 1.40792 12.0508C1.63525 12.0508 1.85327 11.9605 2.01402 11.7997C2.17476 11.639 2.26507 11.421 2.26507 11.1936V2.62221C2.26507 2.39488 2.35537 2.17686 2.51612 2.01612C2.67686 1.85537 2.89488 1.76507 3.12221 1.76507H11.6936C11.921 1.76507 12.139 1.67476 12.2997 1.51402C12.4605 1.35327 12.5508 1.13525 12.5508 0.907924C12.5508 0.680596 12.4605 0.462578 12.2997 0.301833C12.139 0.141087 11.921 0.0507813 11.6936 0.0507813L3.12221 0.0507813ZM5.69364 3.47935C5.23898 3.47935 4.80295 3.65996 4.48146 3.98146C4.15996 4.30295 3.97935 4.73898 3.97935 5.19364V14.3365C3.97935 14.5616 4.02369 14.7845 4.10984 14.9925C4.196 15.2005 4.32227 15.3895 4.48146 15.5487C4.64064 15.7079 4.82962 15.8341 5.03761 15.9203C5.2456 16.0064 5.46852 16.0508 5.69364 16.0508H14.8365C15.0616 16.0508 15.2845 16.0064 15.4925 15.9203C15.7005 15.8341 15.8895 15.7079 16.0487 15.5487C16.2079 15.3895 16.3341 15.2005 16.4203 14.9925C16.5064 14.7845 16.5508 14.5616 16.5508 14.3365V5.19364C16.5508 4.96852 16.5064 4.7456 16.4203 4.53761C16.3341 4.32962 16.2079 4.14064 16.0487 3.98146C15.8895 3.82227 15.7005 3.696 15.4925 3.60984C15.2845 3.52369 15.0616 3.47935 14.8365 3.47935H5.69364Z" fill="white"></path>
+                                </g>
+                                <defs>
+                                    <clipPath id="clip0_2291_6011">
+                                        <rect width="16" height="16" fill="white" transform="translate(0.5)"></rect>
+                                    </clipPath>
+                                </defs>
+                            </svg>
+
+                            Copiar código (Pix Copia e Cola)
+                        </button>
+                    </div>
+                    <hr class="barra">
+                    <div>
+                        <strong>Você também pode tentar lendo o nosso QRCode?</strong>
+                        <div>
+                            <ol>
+                                <li>Abra o aplicativo do seu banco no celular</li>
+                                <li>Selecione a opção de pagar com Pix / escanear QR code</li>
+                                <li>Após o pagamento, você receberá por email os dados de acesso à sua compra (verifique a caixa de SPAM)</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+                <div class="qr-code-pix">
+                    <div id="PixQrCodeImage"></div>
+                    <div class="expira_pix">Expira em: <div id="countdown"></div></div>
+                    <div class="comfirmacao_pix">A compra será confirmada automaticamente após o pagamento </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="BankSlipModal" class="modal" style="display:none background-color: #ff6600; color: black;">
+    <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel"> Pagamento via Boleto</h5>
+                <button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" onclick="closeBankSlipModal()">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <iframe id="BankSlipFrame" style="width:100%; height:500px;" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script src="js/checkoutVeg.js"></script>
+<script src="js/checkoutShipping_1.js"></script>
+
+<script src="js/tokenizecard.js" data-pagarmecheckout-app-id="pk_D1eEywVFgdI9yoRP">
+</script>
+<script type="text/javascript" src="js/qrcode.js"></script>
+<script type="text/javascript" src="js/qr.js"></script>
+
+
+
+
+    <div b-9k5cxc4eae="" class="modal fade" tabindex="-1" role="dialog" id="form-modal">
+        <div b-9k5cxc4eae="" class="modal-dialog modal-dialog-centered modal-xl" role="document">
+            <div b-9k5cxc4eae="" class="modal-content">
+                <h5 b-9k5cxc4eae="" class="modal-title p-3 mb-2 text-black" style="text-align:center; background-color:#f7f7f7; color: black"></h5>
+                <div b-9k5cxc4eae="" class="modal-body">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <script src="js/jquery.min_1.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/site.js"></script>
+
+    
+    
+
+
+
+</body></html>

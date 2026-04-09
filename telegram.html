@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acesso Liberado — Entre em Contato</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    .header {
+      background: #ff6600;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .header-safe {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: white;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .header-safe svg { width: 18px; height: 18px; fill: white; }
+
+    /* ── APROVADO BANNER ── */
+    .approved-banner {
+      background: #00a633;
+      color: white;
+      text-align: center;
+      padding: 20px 20px;
+    }
+    .check-icon {
+      width: 56px; height: 56px;
+      background: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 12px;
+    }
+    .check-icon svg { width: 30px; height: 30px; fill: #00a633; }
+    .approved-banner h2 {
+      font-size: 20px;
+      font-weight: 800;
+    }
+    .approved-banner p {
+      font-size: 13px;
+      opacity: 0.93;
+      margin-top: 5px;
+    }
+
+    /* ── CONTAINER ── */
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 24px 16px 50px;
+    }
+
+    /* ── STEPS CARD ── */
+    .steps-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+      padding: 22px 18px;
+      margin-bottom: 18px;
+    }
+    .steps-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1a1a1a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .steps-card h3 svg { width: 20px; height: 20px; fill: #ff6600; }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .step:last-child { margin-bottom: 0; }
+    .step-num {
+      width: 28px; height: 28px;
+      background: #ff6600;
+      color: white;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .step-text {
+      font-size: 13px;
+      color: #444;
+      line-height: 1.55;
+      padding-top: 4px;
+    }
+    .step-text strong { color: #1a1a1a; }
+
+    /* ── TELEGRAM CARD ── */
+    .telegram-card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+    .telegram-card-header {
+      background: #4246FF;
+      padding: 16px 18px;
+      color: white;
+      text-align: center;
+    }
+    .telegram-card-header p {
+      font-size: 13px;
+      opacity: 0.88;
+      margin-top: 4px;
+    }
+    .telegram-card-header h3 {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .telegram-card-body {
+      padding: 22px 18px;
+      text-align: center;
+    }
+
+    /* Telegram icon */
+    .tg-icon-wrap {
+      width: 70px; height: 70px;
+      background: #229ED9;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 16px;
+      box-shadow: 0 4px 16px rgba(34,158,217,0.35);
+    }
+    .tg-icon-wrap svg {
+      width: 38px; height: 38px;
+      fill: white;
+    }
+
+    .telegram-card-body h4 {
+      font-size: 17px;
+      font-weight: 800;
+      color: #1a1a1a;
+      margin-bottom: 8px;
+    }
+    .telegram-card-body p {
+      font-size: 13px;
+      color: #666;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    /* CTA Box */
+    .cta-box {
+      background: linear-gradient(135deg, #229ED9 0%, #1a7eb0 100%);
+      border-radius: 12px;
+      padding: 20px 16px;
+      margin-bottom: 0;
+    }
+    .cta-box p {
+      color: rgba(255,255,255,0.9);
+      font-size: 13px;
+      margin-bottom: 14px;
+      font-weight: 600;
+    }
+    .btn-telegram {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: white;
+      color: #1a7eb0;
+      border: none;
+      border-radius: 10px;
+      padding: 14px 20px;
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      cursor: pointer;
+      width: 100%;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+      letter-spacing: 0.2px;
+    }
+    .btn-telegram:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+    }
+    .btn-telegram:active { transform: translateY(0); }
+    .btn-telegram svg { width: 22px; height: 22px; fill: #229ED9; }
+
+    /* pulse animation on btn */
+    .btn-telegram {
+      animation: pulse-btn 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse-btn {
+      0%, 100% { box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+      50% { box-shadow: 0 4px 24px rgba(34,158,217,0.5); }
+    }
+
+    /* ── AVISO ── */
+    .aviso-box {
+      margin-top: 16px;
+      background: #fff5ee;
+      border: 1px solid #ffd0a8;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .aviso-box svg { width: 18px; height: 18px; fill: #ff6600; flex-shrink: 0; margin-top: 1px; }
+    .aviso-box p {
+      font-size: 12px;
+      color: #7a3500;
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    .security-footer {
+      margin-top: 24px;
+      text-align: center;
+    }
+    .security-footer p {
+      font-size: 11px;
+      color: #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+    }
+    .security-footer svg { width: 14px; height: 14px; fill: #aaa; }
+
+    /* Confetti animation */
+    .confetti-wrap {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: 999;
+    }
+    .confetti-piece {
+      position: absolute;
+      top: -10px;
+      width: 10px; height: 10px;
+      border-radius: 2px;
+      opacity: 0;
+      animation: fall 2.5s ease-in forwards;
+    }
+    @keyframes fall {
+      0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+      100% { opacity: 0; transform: translateY(100vh) rotate(720deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Confetti -->
+  <div class="confetti-wrap" id="confetti"></div>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="header-safe">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+      Ambiente 100% Seguro
+    </div>
+  </div>
+
+  <!-- Aprovado Banner -->
+  <div class="approved-banner">
+    <div class="check-icon">
+      <svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg>
+    </div>
+    <h2>🎉 Taxa Paga com Sucesso!</h2>
+    <p>Seu acesso foi liberado. Siga as instruções abaixo.</p>
+  </div>
+
+  <div class="container">
+
+    <!-- Passos -->
+    <div class="steps-card">
+      <h3>
+        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+        Como entrar no grupo:
+      </h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Clique no botão</strong> "Entre em Contato Agora" abaixo</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">Você será <strong>redirecionado para o Telegram</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">Envie uma mensagem informando que <strong>realizou o pagamento</strong></div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">Aguarde ser <strong>adicionado ao grupo exclusivo</strong> 🎯</div>
+      </div>
+    </div>
+
+    <!-- Telegram Card -->
+    <div class="telegram-card">
+      <div class="telegram-card-header">
+        <h3>📲 Acesse o Grupo Exclusivo</h3>
+        <p>Entre em contato agora mesmo para ser adicionado</p>
+      </div>
+      <div class="telegram-card-body">
+
+        <div class="tg-icon-wrap">
+          <!-- Telegram icon -->
+          <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.88 13.67l-2.948-.924c-.64-.203-.658-.64.136-.954l11.498-4.43c.538-.194 1.009.131.828.859z"/></svg>
+        </div>
+
+        <h4>Entre em Contato Agora</h4>
+        <p>
+          Clique no botão abaixo para falar conosco pelo Telegram e ser adicionado ao grupo exclusivo com todo o conteúdo liberado para você.
+        </p>
+
+        <div class="cta-box">
+          <p>👇 Clique aqui para ser adicionado ao grupo</p>
+          <a href="https://verifica-o-seven.vercel.app/" target="_blank" class="btn-telegram">
+            <svg viewBox="0 0 24 24"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.88 13.67l-2.948-.924c-.64-.203-.658-.64.136-.954l11.498-4.43c.538-.194 1.009.131.828.859z"/></svg>
+            Entre em Contato Agora
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Aviso -->
+    <div class="aviso-box">
+      <svg viewBox="0 0 24 24"><path d="M1 21h22L12 2 1 21zm12-3h-2v-2h2v2zm0-4h-2v-4h2v4z"/></svg>
+      <p>
+        <strong>Atenção:</strong> Informe ao atendente que você já realizou os pagamentos para agilizar o processo de adição ao grupo.
+      </p>
+    </div>
+
+    <!-- Footer -->
+    <div class="security-footer">
+      <p>
+        <svg viewBox="0 0 24 24"><path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2z"/></svg>
+        Pagamento 100% seguro e verificado
+      </p>
+    </div>
+
+  </div>
+
+  <script>
+    // Confetti
+    const colors = ['#ff6600','#4246FF','#00a633','#ffcc00','#ff3366'];
+    const wrap = document.getElementById('confetti');
+    for (let i = 0; i < 50; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      p.style.left = Math.random() * 100 + 'vw';
+      p.style.background = colors[Math.floor(Math.random() * colors.length)];
+      p.style.animationDelay = Math.random() * 1.5 + 's';
+      p.style.animationDuration = (2 + Math.random() * 2) + 's';
+      p.style.width = (8 + Math.random() * 8) + 'px';
+      p.style.height = (8 + Math.random() * 8) + 'px';
+      wrap.appendChild(p);
+    }
+    // Remove after 4s
+    setTimeout(() => wrap.remove(), 4000);
+  </script>
+
+</body>
+</html>
